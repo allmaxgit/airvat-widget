@@ -6,10 +6,11 @@ import createSagaMiddleware from 'redux-saga';
 import { routerReducer, routerMiddleware } from 'react-router-redux';
 
 import rootReducer from './reducers/rootReducer';
-import someSagas from './sagas/someSagas';
+import rootSaga from './sagas/rootSaga';
 
 const rootPersistConfig = {
   key: 'persist',
+  whitelist: ['some'],
   storage,
 };
 
@@ -32,7 +33,7 @@ export default function configureStore(history) {
   );
 
   // then run the saga
-  sagaMiddleware.run(someSagas);
+  sagaMiddleware.run(rootSaga);
 
   const persistor = persistStore(store);
 

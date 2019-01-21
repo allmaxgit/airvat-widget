@@ -46,7 +46,9 @@ const loaders = [
   {
     test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
     loaders: ['url?name=[name].[ext]?[hash]']
-  }
+  },
+  { test: /\.tsx?$/, loader: 'awesome-typescript-loader' },
+  { enforce: 'pre', test: /\.js$/, loader: 'source-map-loader' },
 ];
 
 module.exports = {

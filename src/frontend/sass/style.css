@@ -1,0 +1,26 @@
+.user-table {
+  width: 100%;
+  background: #eeeeee;
+  border: 1px solid #999999;
+}
+
+.user-table thead {
+  border-bottom: 1px solid #999999;
+}
+
+.user-table th {
+  text-align: center;
+  width: 10%;
+}
+
+.filter-column {
+  display: flex;
+}
+
+.filter-column input {
+  flex: 1;
+}
+
+.filter-column button {
+  border-radius: 0;
+}
