@@ -17,7 +17,7 @@ const plugins = [
   }),
   new HtmlWebpackPlugin({
     title: 'Todo App',
-    template: './src/html/index.html',
+    template: './src/html/frontend/index.html',
     hash: true
   }),
   new ExtractTextPlugin('styles.css?[contenthash]'),

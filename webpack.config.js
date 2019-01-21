@@ -1,7 +1,7 @@
 const CONFIG = require('./webpack');
 
 module.exports = {
-  entry: './src/js/app.js',
+  entry: './src/frontend/js/app.js',
   output: {
     path: './public',
     publicPath: CONFIG.publicPath,
