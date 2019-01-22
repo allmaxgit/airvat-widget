@@ -5,10 +5,10 @@ export const SortButton = ({
   onClick,
 }: {
   sortOrder: string,
-  onClick: Function,
+  onClick: () => void
 }) => (
   <button
-    onClick={() => onClick()}
+    onClick={onClick}
   >
     { !sortOrder && '↕' }
     { sortOrder === 'asc' && '↓' }

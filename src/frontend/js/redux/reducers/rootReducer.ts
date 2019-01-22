@@ -2,9 +2,31 @@ import { createReducer } from 'reduxsauce';
 
 import TYPES from '../../constants/actionTypes';
 
-// const someActionHandler = (state, { payload }) => {
-//   return { ...state };
-// };
+export type UserType = {
+  account: {
+    address1: string,
+    address2: string,
+    defaultRefundMethodId: string,
+    displayName: string,
+    dob: number,
+    email: string,
+    firstName: string,
+    passportNo: string,
+    phone: string,
+    residenceCity: string,
+    residenceCountry: string,
+    surname: string,
+  },
+  meta: {
+    [x: string]: string,
+  },
+  email: string,
+  firstName: string,
+  lastActive: number
+  name: string,
+  surname: string,
+  id?: number,
+}
 
 export type RootState = {
   readonly sortBy: string;
@@ -19,7 +41,7 @@ export type RootState = {
     readonly lastActiveFrom: string,
     readonly lastActiveTo: string,
   },
-  readonly users: ReadonlyArray<any>,
+  readonly users: ReadonlyArray<UserType>,
   readonly limit: number,
   readonly page: number,
   readonly count: number,

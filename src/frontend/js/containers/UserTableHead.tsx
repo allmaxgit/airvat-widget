@@ -13,8 +13,8 @@ import {
 import { DateFilter } from "../components/DateFilter";
 
 type Props = RootState & {
-  setFilter: Function,
-  changeSortOrder: Function,
+  setFilter: (field: string, value: string) => void,
+  changeSortOrder: (field: string) => void,
   lastActiveFrom: string,
   lastActiveTo: string,
 }

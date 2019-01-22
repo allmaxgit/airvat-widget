@@ -1,4 +1,5 @@
-const db = require('../../db.js');
+// const db = require('../../db.ts');
+import db from '../../db';
 
 const entryFilter = (account, filters) => !Object.keys(filters).map(filter => (
   !filters[filter] ||

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --hot --inline",
-    "serve": "nodemon src/backend/server.js",
+    "serve": "nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec 'ts-node' src/backend/server.ts",
     "seed": "node src/seeding/seed-db.js",
     "build": "NODE_ENV=production webpack",
     "flow": "flow; test $? -eq 0 -o $? -eq 2"
@@ -46,6 +46,7 @@
     "sass-loader": "^3.2.3",
     "source-map-loader": "^0.2.4",
     "style-loader": "^0.21.0",
+    "ts-node": "^8.0.1",
     "typescript": "^3.2.4",
     "url-loader": "^0.5.7",
     "webpack": "^4.29.0",
@@ -54,6 +55,8 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@firebase/app": "^0.3.7",
+    "@firebase/firestore": "^1.0.0",
     "@types/classnames": "^2.2.7",
     "@types/react": "^16.7.20",
     "@types/react-dom": "^16.0.11",

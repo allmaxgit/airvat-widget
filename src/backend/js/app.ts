@@ -1,15 +1,10 @@
-/*
-  npm install --save express mongodb body-parser
- */
-const createError = require('http-errors');
-const express = require('express');
-const path = require('path');
-const cookieParser = require('cookie-parser');
-// const lessMiddleware = require('less-middleware');
-const logger = require('morgan');
-const bodyParser = require('body-parser');
-
-const mainRouter = require('./routes/mainRouter');
+import * as createError from 'http-errors';
+import * as express from 'express';
+import * as path from 'path';
+import * as cookieParser from 'cookie-parser';
+import * as logger from 'morgan';
+import * as bodyParser from 'body-parser';
+import mainRouter from './routes/mainRouter'
 
 const app = express();
 

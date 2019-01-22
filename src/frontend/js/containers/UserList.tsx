@@ -2,9 +2,10 @@ import * as React from 'react';
 import * as classnames from "classnames";
 
 import { UserRow } from "../components/UserRow";
+import {UserType} from "../redux/reducers/rootReducer";
 
 type Props = {
-  users: Array<any>,
+  users: Array<UserType>,
   loaded: boolean,
 }
 

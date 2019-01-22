@@ -4,9 +4,9 @@ import { SortButton } from "./SortButton";
 type Props = {
   lastActiveFrom: string,
   lastActiveTo: string,
-  setFilter: Function,
+  setFilter: (field: string, value: string) => void,
   sortOrder: string,
-  onSortChange: Function,
+  onSortChange: (field: string) => void,
 }
 
 export class DateFilter extends React.Component<Props, {}> {

@@ -7,7 +7,8 @@
     "allowSyntheticDefaultImports": true,
     "module": "commonjs",
     "target": "es5",
-    "jsx": "react"
+    "jsx": "react",
+    "lib": [ "es2015", "DOM" ]
   },
   "include": [
     "./src/**/*"

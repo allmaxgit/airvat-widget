@@ -6,8 +6,8 @@ type Props = {
   sortOrder: string,
   value: string,
   field: string,
-  onSortChange: Function,
-  onFilterChange: Function,
+  onSortChange: (field: string) => void,
+  onFilterChange: (field: string, value: string) => void,
 }
 
 export class ColumnFilter extends React.PureComponent<Props, {}> {
