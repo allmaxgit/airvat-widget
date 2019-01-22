@@ -149,6 +149,11 @@ div.cut-row {
   color: white;
 }
 
+.user-pager li.disabled {
+  pointer-events: none;
+  color: rgba(0, 0, 0, 0.1);
+}
+
 .user-pager li a {
   display: flex;
   width: 100%;
