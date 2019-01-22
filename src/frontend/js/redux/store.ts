@@ -17,10 +17,8 @@ const rootPersistConfig: PersistConfig = {
 
 const rootPersistReducer = persistReducer(rootPersistConfig, rootReducer);
 
-// create the saga middleware
 const sagaMiddleware = createSagaMiddleware();
 
-//redux extension composer
 const composeEnhancers =
   typeof window === 'object' &&
   (<any>window).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
@@ -35,7 +33,6 @@ export default function configureStore(): { store: Store<any>, persistor: Persis
 
   const rootSagaFix:any = rootSaga;
 
-  // then run the saga
   sagaMiddleware.run(rootSagaFix);
 
   const persistor = persistStore(store);
