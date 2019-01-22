@@ -17,8 +17,10 @@ Next, change firebase credentials in following files:
 ```
 Perform initial data seeding if needed:
 ```npm run seed```
+
 Run backend server:
 ```npm run serve```
+
 Start frontend development server:
 ```npm start```
 
