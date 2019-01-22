@@ -4,12 +4,13 @@ import { connect } from 'react-redux';
 import { ColumnFilter } from "../components/ColumnFilter";
 import { RootState } from "../redux/reducers/rootReducer";
 import { bindActionCreators } from "redux";
-import { DateFilter } from '../components/DateFilter';
 
 import {
   changeSortOrder,
   setFilter,
 } from "../redux/actions/rootActions";
+
+import { DateFilter } from "../components/DateFilter";
 
 type Props = RootState & {
   setFilter: Function,
@@ -31,14 +32,6 @@ class Component extends React.Component<Props, {}> {
     return (this.props.sortBy === field && this.props.sortOrder)
       ? this.props.sortOrder
       : ''
-  };
-
-  setActiveFrom = ({ target: { value } }): void => {
-    console.log('FROM', value);
-  };
-
-  setActiveTo = ({ target: { value } }): void => {
-    console.log('TO', value);
   };
 
   render() {
@@ -110,25 +103,13 @@ class Component extends React.Component<Props, {}> {
           onSortChange={this.setSortValue}
         />
         <td className="filter-column-date">
-          <div>
-            <input
-              type="date"
-              max={lastActiveTo}
-              value={lastActiveFrom}
-              onChange={this.setActiveFrom}
-            />
-            <input
-              type="date"
-              min={lastActiveFrom}
-              value={lastActiveTo}
-              onChange={this.setActiveTo}
-            />
-            <button
-
-            >
-              ↕
-            </button>
-          </div>
+          <DateFilter
+            setFilter={this.props.setFilter}
+            lastActiveFrom={lastActiveFrom}
+            lastActiveTo={lastActiveTo}
+            sortOrder={this.isSortingBy('lastActive')}
+            onSortChange={this.setSortValue}
+          />
         </td>
       </tr>
       </thead>

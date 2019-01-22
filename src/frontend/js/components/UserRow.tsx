@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import * as moment from 'moment';
 
 type Props = {
   user: {
@@ -9,6 +10,7 @@ type Props = {
     phone: (string | number),
     residenceCountry: string,
     residenceCity: string,
+    lastActive: number,
   }
 }
 
@@ -20,6 +22,7 @@ export const UserRow = ({
     phone,
     residenceCountry,
     residenceCity,
+    lastActive,
   }
 }: Props) => (
   <tr>
@@ -29,5 +32,6 @@ export const UserRow = ({
     <td>{phone}</td>
     <td>{residenceCountry}</td>
     <td>{residenceCity}</td>
+    <td>{moment(lastActive).format('LLL')}</td>
   </tr>
 );

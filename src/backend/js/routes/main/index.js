@@ -21,11 +21,23 @@ module.exports = async (req, res) => {
     phone,
     sortBy,
     sortOrder,
+    lastActiveFrom,
+    lastActiveTo,
   } = req.query;
 
   let query = db.collection('users');
 
-  if (sortBy && sortOrder) {
+  if (lastActiveFrom && Date.parse(lastActiveFrom)) {
+    query = query.where('lastActive', '>=', Date.parse(lastActiveFrom));
+  }
+
+  if (lastActiveTo && Date.parse(lastActiveTo)) {
+    query = query.where('lastActive', '<=', Date.parse(lastActiveTo));
+  }
+
+  if (sortBy && sortBy === 'lastActive' && sortOrder) {
+    query = query.orderBy(sortBy, sortOrder);
+  } else if (sortBy && sortOrder) {
     query = query.orderBy(`account.${sortBy}`, sortOrder);
   }
 
@@ -35,6 +47,7 @@ module.exports = async (req, res) => {
       id: doc.id,
     })));
 
+  // Fulltext search needs Agolia or in-place filtering
   users = batchFilter(users, {
     firstName,
     surname,
@@ -45,9 +58,6 @@ module.exports = async (req, res) => {
   });
 
   const limit = users.length;
-
-  console.log('users length is', users.length);
-  console.log(`slicing from ${offset} to ${offset + count}`);
 
   users = users.slice(parseInt(offset, 10), (parseInt(offset, 10) + parseInt(count, 10)));
 

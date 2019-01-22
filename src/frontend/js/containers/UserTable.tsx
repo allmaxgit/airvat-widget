@@ -15,10 +15,13 @@ const Component = ({ users, loaded }: Props) => (
     <UserTableHead />
     <tbody className={classnames({ 'busy': !loaded })}>
       {
-        users.map(user => (
+        users.map(({ id, account, lastActive }) => (
           <UserRow
-            user={user.account}
-            key={user.id}
+            user={{
+              ...account,
+              lastActive,
+            }}
+            key={id}
           />
         ))
       }
