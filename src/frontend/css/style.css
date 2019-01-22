@@ -54,6 +54,11 @@ div.cut-row {
   background: rgba(0, 0, 0, 0.1);
 }
 
+.user-table thead button.active {
+  background: #2ab0ff;
+  color: white;
+}
+
 .user-table tbody {
   position: relative;
 }
@@ -110,6 +115,7 @@ div.cut-row {
   text-transform: uppercase;
   font-size: 1.2em;
   opacity: 0.5;
+  user-select: none;
 }
 
 .user-pager {
@@ -129,6 +135,8 @@ div.cut-row {
   cursor: pointer;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-bottom: 4px solid rgba(0, 0, 0, 0.1);
+  transition: all 250ms;
+  user-select: none;
 }
 
 .user-pager li:first-child {
@@ -146,7 +154,9 @@ div.cut-row {
 .user-pager li.active {
   background: #2ab0ff;
   transform: scale(1.1);
+  border-radius: 2px;
   color: white;
+  position: relative;
 }
 
 .user-pager li.disabled {

@@ -27,14 +27,17 @@ class Component extends React.Component<Props, {}> {
     return (
       <div>
         <UserTable />
-        <Pager
-          total={pages}
-          current={page}
-          visiblePages={5}
-          titles={{ first: '<', last: '>' }}
-          className="user-pager"
-          onPageChanged={this.setPage}
-        />
+        {
+          limit > count &&
+            <Pager
+              total={pages}
+              current={page}
+              visiblePages={5}
+              titles={{ first: '<', last: '>' }}
+              className="user-pager"
+              onPageChanged={this.setPage}
+            />
+        }
       </div>
     )
   }
