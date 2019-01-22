@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { SortButton } from "./SortButton";
 
 type Props = {
   sortOrder: string,
@@ -31,14 +32,9 @@ export class ColumnFilter extends React.PureComponent<Props, {}> {
             type="text"
             value={value}
             onChange={this.changeFilter}
+            size={1}
           />
-          <button
-            onClick={this.changeSortOrder}
-          >
-            { !sortOrder && '↕' }
-            { sortOrder === 'asc' && '↓' }
-            { sortOrder === 'desc' && '↑' }
-          </button>
+          <SortButton sortOrder={sortOrder} onClick={this.changeSortOrder} />
         </div>
       </td>
     )

@@ -55,6 +55,7 @@ const changeSortOrderHandler = (
       ...state,
       sortBy: field,
       sortOrder: 'asc',
+      page: 0,
     }
   }
 
@@ -62,6 +63,7 @@ const changeSortOrderHandler = (
     return {
       ...state,
       sortOrder: 'desc',
+      page: 0,
     }
   }
 

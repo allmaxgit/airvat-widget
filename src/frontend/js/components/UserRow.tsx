@@ -26,12 +26,40 @@ export const UserRow = ({
   }
 }: Props) => (
   <tr>
-    <td>{firstName}</td>
-    <td>{surname}</td>
-    <td>{email}</td>
-    <td>{phone}</td>
-    <td>{residenceCountry}</td>
-    <td>{residenceCity}</td>
-    <td>{moment(lastActive).format('LLL')}</td>
+    <td>
+      <div className="cut-row">
+        {firstName}
+      </div>
+    </td>
+    <td>
+      <div className="cut-row">
+        {surname}
+      </div>
+    </td>
+    <td>
+      <div className="cut-row">
+        {email}
+      </div>
+    </td>
+    <td>
+      <div className="cut-row">
+        {phone}
+      </div>
+    </td>
+    <td>
+      <div className="cut-row">
+        {residenceCountry}
+      </div>
+    </td>
+    <td>
+      <div className="cut-row">
+        {residenceCity}
+      </div>
+    </td>
+    <td>
+      <div className="cut-row">
+        {moment(lastActive).format('LLL')}
+      </div>
+    </td>
   </tr>
 );

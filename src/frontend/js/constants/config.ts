@@ -3,5 +3,5 @@ type CONFIG = {
 };
 
 export const CONFIG: CONFIG = {
-  API_URL: 'http://localhost:8080/',
+  API_URL: 'http://192.168.88.40:8080/',
 };

@@ -5,6 +5,8 @@ import { UserTableHead } from "./UserTableHead";
 import { UserRow } from "../components/UserRow";
 
 import * as classnames from 'classnames'
+import {UserList} from "./UserList";
+import {UserListEmpty} from "../components/UserListEmpty";
 
 type Props = {
   users: Array<any>,
@@ -13,19 +15,8 @@ type Props = {
 const Component = ({ users, loaded }: Props) => (
   <table className="user-table">
     <UserTableHead />
-    <tbody className={classnames({ 'busy': !loaded })}>
-      {
-        users.map(({ id, account, lastActive }) => (
-          <UserRow
-            user={{
-              ...account,
-              lastActive,
-            }}
-            key={id}
-          />
-        ))
-      }
-    </tbody>
+    { users.length > 0 && <UserList users={users} loaded={loaded} /> }
+    { users.length === 0 && <UserListEmpty loaded={loaded} /> }
   </table>
 );
 

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { SortButton } from "./SortButton";
 
 type Props = {
   lastActiveFrom: string,
@@ -17,8 +18,7 @@ export class DateFilter extends React.Component<Props, {}> {
     this.props.setFilter('lastActiveTo', value);
   };
 
-  changeSortOrder = () => {
-    console.log('Change order?');
+  changeSortOrder = (): void => {
     this.props.onSortChange('lastActive');
   };
 
@@ -32,20 +32,16 @@ export class DateFilter extends React.Component<Props, {}> {
           max={lastActiveTo}
           value={lastActiveFrom}
           onChange={this.setActiveFrom}
+          size={1}
         />
         <input
           type="date"
           min={lastActiveFrom}
           value={lastActiveTo}
           onChange={this.setActiveTo}
+          size={1}
         />
-        <button
-          onClick={this.changeSortOrder}
-        >
-          { !sortOrder && '↕' }
-          { sortOrder === 'asc' && '↓' }
-          { sortOrder === 'desc' && '↑' }
-        </button>
+        <SortButton sortOrder={sortOrder} onClick={this.changeSortOrder} />
       </div>
     )
   }
