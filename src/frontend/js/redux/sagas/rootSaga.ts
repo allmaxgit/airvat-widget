@@ -31,7 +31,7 @@ function* fetchDataSaga() {
   yield put(setLoaded(true));
 }
 
-function* mySaga() {
+function* mySaga(): SagaIterator {
   // fetch autocompletion on location input
   yield takeLatest(REHYDRATE, rehydrateSaga);
 
