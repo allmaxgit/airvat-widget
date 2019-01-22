@@ -21,7 +21,7 @@ export type RootState = {
   },
   readonly users: ReadonlyArray<any>,
   readonly limit: number,
-  readonly offset: number,
+  readonly page: number,
   readonly count: number,
   readonly loaded: boolean,
 };
@@ -69,7 +69,7 @@ const changeSortOrderHandler = (
     ...state,
     sortBy: '',
     sortOrder: '',
-    offset: 0,
+    page: 0,
   };
 };
 
@@ -84,11 +84,23 @@ const setFilterHandler = (
   }
 ): RootState => ({
   ...state,
-  offset: 0,
+  page: 0,
   filter: {
     ...state.filter,
     [field]: value,
   }
+});
+
+const setPageHandler = (
+  state: RootState,
+  {
+    page,
+  }: {
+    page: number,
+  }
+): RootState => ({
+  ...state,
+  page,
 });
 
 const HANDLERS = {
@@ -96,6 +108,7 @@ const HANDLERS = {
   [TYPES.SET_LOADED]: setLoadedHandler,
   [TYPES.SET_FILTER]: setFilterHandler,
   [TYPES.CHANGE_SORT_ORDER]: changeSortOrderHandler,
+  [TYPES.SET_PAGE]: setPageHandler,
 };
 
 const INITIAL_STATE: RootState = {
@@ -113,8 +126,8 @@ const INITIAL_STATE: RootState = {
   },
   users: [],
   limit: 0,
-  offset: 0,
-  count: 15,
+  page: 0,
+  count: 20,
   loaded: false,
 };
 

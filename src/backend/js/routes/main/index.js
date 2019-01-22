@@ -1,38 +1,55 @@
 const db = require('../../db.js');
 
-const dataFilter = (data, field, value) => (
-  field && value
-    ? data.filter(entry => entry.account && entry.account[field] && entry.account[field].indexOf(value) >= 0)
-    : data
-);
+const entryFilter = (account, filters) => !Object.keys(filters).map(filter => (
+  !filters[filter] ||
+  (account[filter] && (account[filter].indexOf(filters[filter]) >= 0))
+)).some(result => result === false);
+
+const batchFilter = (data, filters) => data.filter(entry => (
+  entry.account && entryFilter(entry.account, filters)
+));
 
 module.exports = async (req, res) => {
   const {
     firstName,
     surname,
-    count,
-    offset,
+    count = 15,
+    offset = 0,
     residenceCity,
     residenceCountry,
     email,
     phone,
+    sortBy,
+    sortOrder,
   } = req.query;
 
-  let users = await db.collection('users').get()
+  let query = db.collection('users');
+
+  if (sortBy && sortOrder) {
+    query = query.orderBy(`account.${sortBy}`, sortOrder);
+  }
+
+  let users = await query.get()
     .then(querySnapshot => querySnapshot.docs.map(doc => ({
       ...doc.data(),
       id: doc.id,
     })));
 
-  users = dataFilter(users, 'firstName', firstName);
-  users = dataFilter(users, 'surname', surname);
-  users = dataFilter(users, 'email', email);
-  users = dataFilter(users, 'phone', phone);
-  users = dataFilter(users, 'residenceCity', residenceCity);
-  users = dataFilter(users, 'residenceCountry', residenceCountry);
-  users = users.slice(offset, (offset + count));
-  
+  users = batchFilter(users, {
+    firstName,
+    surname,
+    email,
+    phone,
+    residenceCity,
+    residenceCountry,
+  });
+
   const limit = users.length;
+
+  console.log('users length is', users.length);
+  console.log(`slicing from ${offset} to ${offset + count}`);
+
+  users = users.slice(parseInt(offset, 10), (parseInt(offset, 10) + parseInt(count, 10)));
 
   res.send({ success: true, users, limit });
 };

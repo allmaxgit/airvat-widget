@@ -8,7 +8,7 @@ import { setLoaded, setUsers } from "../actions/rootActions";
 
 import ACTIONS from '../../constants/actionTypes';
 
-function* rehydrateSaga({ type, payload }): SagaIterator {
+function* rehydrateSaga(): SagaIterator {
   yield put(setLoaded(false));
 
   const { root: { count } } = yield select();
@@ -20,9 +20,10 @@ function* rehydrateSaga({ type, payload }): SagaIterator {
 
 function* fetchDataSaga() {
   yield put(setLoaded(false));
-  yield delay(1000);
+  yield delay(500);
 
-  const { root: { filter, count, sortBy, sortOrder, offset } } = yield select();
+  const { root: { filter, count, sortBy, sortOrder, page } } = yield select();
+  const offset = page * count;
 
   const { users, limit } = yield call(fetchUsers, { filter, count, sortBy, sortOrder, offset });
 
@@ -37,6 +38,7 @@ function* mySaga() {
   yield takeLatest([
     ACTIONS.CHANGE_SORT_ORDER,
     ACTIONS.SET_FILTER,
+    ACTIONS.SET_PAGE,
   ], fetchDataSaga)
 }
 

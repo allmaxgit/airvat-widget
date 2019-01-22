@@ -1,16 +1,63 @@
+body {
+  font-size: 14px;
+}
+
+input[type="text"],
+input[type="date"]
+{
+  height: 24px;
+  padding: 0 5px;
+  border: none;
+  box-shadow: inset #cccccc 0 0 0 1px;
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+button:focus
+{
+  outline: none;
+  box-shadow: inset #2ab0ff 0 0 0 1px;
+}
+
+button {
+  border-radius: 0;
+  border: none;
+  background: #cccccc;
+  height: 24px;
+  width: 24px;
+  padding: 0;
+}
+
 .user-table {
+  padding: 10px 5px;
   width: 100%;
   background: #eeeeee;
-  border: 1px solid #999999;
 }
 
 .user-table thead {
   border-bottom: 1px solid #999999;
 }
 
+.user-table tbody.busy {
+  opacity: 0.3;
+  user-select: none;
+}
+
 .user-table th {
   text-align: center;
   width: 10%;
+}
+
+.user-table td {
+  padding: 5px;
+}
+
+.user-table tr {
+  transition: background 250ms;
+}
+
+.user-table tr:hover {
+  background: #dddddd;
 }
 
 .filter-column {
@@ -21,6 +68,48 @@
   flex: 1;
 }
 
-.filter-column button {
-  border-radius: 0;
+.filter-column-date {
+  width: 20%;
+}
+
+.filter-column-date div {
+  display: flex;
+}
+
+.filter-column-date input {
+  flex: 1;
+}
+
+.user-pager {
+  display: flex;
+  margin: 10px 0;
+  padding: 0;
+  float: right;
+}
+
+.user-pager li {
+  display: flex;
+  width: 32px;
+  height: 32px;
+  background: #eeeeee;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.user-pager li:hover {
+  background: #dddddd;
+}
+
+.user-pager li.active {
+  background: #dddddd;
+  transform: scale(1.2);
+}
+
+.user-pager li a {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
 }

@@ -26,3 +26,18 @@ export const setFilter = (field: string, value: string): ACTION_TYPE => ({
   field,
   value,
 });
+
+export const setPage = (page: number): ACTION_TYPE => ({
+  type: TYPES.SET_PAGE,
+  page,
+});
+
+export const setDateFrom = (lastActiveFrom: number): ACTION_TYPE => ({
+  type: TYPES.SET_FILTER,
+  lastActiveFrom,
+});
+
+export const setDateTo = (lastActiveTo: number): ACTION_TYPE => ({
+  type: TYPES.SET_FILTER,
+  lastActiveTo,
+});

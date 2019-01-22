@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { ColumnFilter } from "../components/ColumnFilter";
 import { RootState } from "../redux/reducers/rootReducer";
 import { bindActionCreators } from "redux";
+import { DateFilter } from '../components/DateFilter';
 
 import {
   changeSortOrder,
@@ -13,6 +14,8 @@ import {
 type Props = RootState & {
   setFilter: Function,
   changeSortOrder: Function,
+  lastActiveFrom: string,
+  lastActiveTo: string,
 }
 
 class Component extends React.Component<Props, {}> {
@@ -30,6 +33,14 @@ class Component extends React.Component<Props, {}> {
       : ''
   };
 
+  setActiveFrom = ({ target: { value } }): void => {
+    console.log('FROM', value);
+  };
+
+  setActiveTo = ({ target: { value } }): void => {
+    console.log('TO', value);
+  };
+
   render() {
     const {
       filter: {
@@ -39,6 +50,8 @@ class Component extends React.Component<Props, {}> {
         phone,
         residenceCountry,
         residenceCity,
+        lastActiveFrom,
+        lastActiveTo,
       },
     } = this.props;
 
@@ -96,6 +109,27 @@ class Component extends React.Component<Props, {}> {
           onFilterChange={this.setFilterValue}
           onSortChange={this.setSortValue}
         />
+        <td className="filter-column-date">
+          <div>
+            <input
+              type="date"
+              max={lastActiveTo}
+              value={lastActiveFrom}
+              onChange={this.setActiveFrom}
+            />
+            <input
+              type="date"
+              min={lastActiveFrom}
+              value={lastActiveTo}
+              onChange={this.setActiveTo}
+            />
+            <button
+
+            >
+              ↕
+            </button>
+          </div>
+        </td>
       </tr>
       </thead>
     )
