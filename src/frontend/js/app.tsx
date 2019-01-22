@@ -8,7 +8,7 @@ import { App } from './containers/App';
 
 const { store, persistor } = configureStore();
 
-import '../sass/style.css';
+import '../css/style.css';
 
 render(
   <Provider store={store}>

@@ -33,7 +33,7 @@ const loaders = [
   },
   {
     test: /\.scss$/,
-    loader: ExtractTextPlugin.extract('style', 'css!sass?sourceMap')
+    loader: ExtractTextPlugin.extract('style', 'css!css?sourceMap')
   },
   {
     test: /\.json$/,

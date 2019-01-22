@@ -37,7 +37,7 @@ const loaders = [
   },
   {
     test: /\.scss$/,
-    loader: ExtractTextPlugin.extract('style', 'css!sass')
+    loader: ExtractTextPlugin.extract('style', 'css!css')
   },
   {
     test: /\.json$/,
