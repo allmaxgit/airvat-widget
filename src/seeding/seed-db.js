@@ -206,7 +206,7 @@ function createRandomRefundMethod(ownerId, start, end) {
       owner: ownerId,
       type,
     };
-  } else if (type == types[0]) {
+  } else if (type === types[0]) {
     return {
       createdAt,
       owner: ownerId,

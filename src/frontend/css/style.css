@@ -46,11 +46,16 @@ div.cut-row {
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-bottom: 4px solid rgba(0, 0, 0, 0.1);
   border-radius: 2px;
+  position: relative;
 }
 
 .user-table thead {
   border-bottom: 1px solid #999999;
   background: rgba(0, 0, 0, 0.1);
+}
+
+.user-table tbody {
+  position: relative;
 }
 
 .user-table tbody.busy {

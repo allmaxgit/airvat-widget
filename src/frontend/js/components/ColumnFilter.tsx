@@ -33,6 +33,7 @@ export class ColumnFilter extends React.PureComponent<Props, {}> {
             value={value}
             onChange={this.changeFilter}
             size={1}
+            placeholder="..."
           />
           <SortButton sortOrder={sortOrder} onClick={this.changeSortOrder} />
         </div>
