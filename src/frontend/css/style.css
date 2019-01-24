@@ -18,7 +18,7 @@ input[type="date"]:focus,
 button:focus
 {
   outline: none;
-  box-shadow: inset #2ab0ff 0 0 0 1px;
+  box-shadow: inset #137cbd 0 0 0 1px;
 }
 
 button {
@@ -55,7 +55,7 @@ div.cut-row {
 }
 
 .user-table thead button.active {
-  background: #2ab0ff;
+  background: #137cbd;
   color: white;
 }
 
@@ -152,7 +152,7 @@ div.cut-row {
 }
 
 .user-pager li.active {
-  background: #2ab0ff;
+  background: #137cbd;
   transform: scale(1.1);
   border-radius: 2px;
   color: white;
@@ -170,4 +170,8 @@ div.cut-row {
   height: 100%;
   align-items: center;
   justify-content: center;
+}
+
+.user-pager li.active a {
+  color: white;
 }
