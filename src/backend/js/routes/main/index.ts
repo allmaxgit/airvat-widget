@@ -6,9 +6,21 @@ const entryFilter = (account, filters) => !Object.keys(filters).map(filter => (
   (account[filter] && (account[filter].indexOf(filters[filter]) >= 0))
 )).some(result => result === false);
 
-const batchFilter = (data, filters) => data.filter(entry => (
-  entry.account && entryFilter(entry.account, filters)
-));
+// const batchFilter = (data, filters) => data.filter(entry => (
+//   entry.account && entryFilter(entry.account, filters)
+// ));
+
+const queryFilter = (query, filters) => {
+  let result = query;
+  Object.keys(filters).map(filter => {
+    if (!filters[filter]) return;
+
+    result = result.where(`account.${filter}`, '==', filters[filter]);
+    console.log('query where', `account.${filter}`, '==', filters[filter]);
+  });
+
+  return result;
+};
 
 module.exports = async (req, res) => {
   const {
@@ -42,14 +54,7 @@ module.exports = async (req, res) => {
     query = query.orderBy(`account.${sortBy}`, sortOrder);
   }
 
-  let users = await query.get()
-    .then(querySnapshot => querySnapshot.docs.map(doc => ({
-      ...doc.data(),
-      id: doc.id,
-    })));
-
-  // Fulltext search needs Agolia or in-place filtering
-  users = batchFilter(users, {
+  query = queryFilter(query, {
     firstName,
     surname,
     email,
@@ -58,9 +63,22 @@ module.exports = async (req, res) => {
     residenceCountry,
   });
 
-  const limit = users.length;
+  const limit = await query.get().then(snap => snap.size);
 
-  users = users.slice(parseInt(offset, 10), (parseInt(offset, 10) + parseInt(count, 10)));
+  if (parseInt(offset, 10) > 0) {
+    const firstDocRef = await query.limit(parseInt(offset, 10)).get().then(snap => snap.docs[snap.docs.length - 1]);
+    query = query.startAfter(firstDocRef);
+  }
+
+  let users = await query
+    .limit(parseInt(count, 10))
+    .get()
+    .then(querySnapshot => {
+      return querySnapshot.docs.map(doc => ({
+        ...doc.data(),
+        id: doc.id,
+      }))
+    });
 
   res.send({ success: true, users, limit });
 };
