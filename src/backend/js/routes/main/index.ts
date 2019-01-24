@@ -14,9 +14,8 @@ const queryFilter = (query, filters) => {
   let result = query;
   Object.keys(filters).map(filter => {
     if (!filters[filter]) return;
-
+    console.log('F', filter);
     result = result.where(`account.${filter}`, '==', filters[filter]);
-    console.log('query where', `account.${filter}`, '==', filters[filter]);
   });
 
   return result;
@@ -48,12 +47,6 @@ module.exports = async (req, res) => {
     query = query.where('lastActive', '<=', Date.parse(lastActiveTo));
   }
 
-  if (sortBy && sortBy === 'lastActive' && sortOrder) {
-    query = query.orderBy(sortBy, sortOrder);
-  } else if (sortBy && sortOrder) {
-    query = query.orderBy(`account.${sortBy}`, sortOrder);
-  }
-
   query = queryFilter(query, {
     firstName,
     surname,
@@ -70,8 +63,15 @@ module.exports = async (req, res) => {
     query = query.startAfter(firstDocRef);
   }
 
+  query = query.limit(parseInt(count, 10));
+
+  if (sortBy && sortBy === 'lastActive' && sortOrder) {
+    query = query.orderBy(sortBy, sortOrder);
+  } else if (sortBy && sortOrder) {
+    query = query.orderBy(`account.${sortBy}`, sortOrder);
+  }
+
   let users = await query
-    .limit(parseInt(count, 10))
     .get()
     .then(querySnapshot => {
       return querySnapshot.docs.map(doc => ({
