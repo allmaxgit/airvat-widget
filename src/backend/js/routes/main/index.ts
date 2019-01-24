@@ -56,6 +56,13 @@ module.exports = async (req, res) => {
     residenceCountry,
   });
 
+  // sort. not working with field filters.
+  if (sortBy && sortBy === 'lastActive' && sortOrder) {
+    query = query.orderBy(sortBy, sortOrder);
+  } else if (sortBy && sortOrder) {
+    query = query.orderBy(`${sortBy}`, sortOrder);
+  }
+
   const limit = await query.get().then(snap => snap.size);
 
   if (parseInt(offset, 10) > 0) {
@@ -64,12 +71,6 @@ module.exports = async (req, res) => {
   }
 
   query = query.limit(parseInt(count, 10));
-
-  if (sortBy && sortBy === 'lastActive' && sortOrder) {
-    query = query.orderBy(sortBy, sortOrder);
-  } else if (sortBy && sortOrder) {
-    query = query.orderBy(`account.${sortBy}`, sortOrder);
-  }
 
   let users = await query
     .get()
